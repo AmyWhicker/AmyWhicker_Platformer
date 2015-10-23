@@ -1,10 +1,11 @@
 // Map each class of actor to a character
 var actorChars = {
   "@": Player,
-  "o": Coin, // A coin will wobble up and down
+  "o": Coin,
   "g": Gem,
   "=": Lava, "|": Lava, "v": Lava  
 };
+
 
 function Level(plan) {
   // Use the length of a single row to set the width of the level
@@ -25,7 +26,7 @@ function Level(plan) {
 
     // Loop through each array element in the inner array for the type of the tile
     for (var x = 0; x < this.width; x++) {
-      // Get the type from that character in the string. It can be 'x', '!' or ' '
+      // Get the type from that character in the string. It can be 'd', '!' or ' ', or 'n'
       // If the character is ' ', assign null.
 
       var ch = line[x], fieldType = null;
@@ -34,7 +35,7 @@ function Level(plan) {
       if (Actor)
         // Create a new actor at that grid position.
         this.actors.push(new Actor(new Vector(x, y), ch));
-      else if (ch == "x")
+      else if (ch == "d")
         fieldType = "wall";
       // Because there is a third case (space ' '), use an "else if" instead of "else"
       else if (ch == "!")
@@ -66,6 +67,7 @@ function Vector(x, y) {
 Vector.prototype.plus = function(other) {
   return new Vector(this.x + other.x, this.y + other.y);
 };
+
 
 // Vector arithmetic: v_1 * factor = <a,b>*factor = <a*factor,b*factor>
 Vector.prototype.times = function(factor) {
@@ -324,8 +326,8 @@ var playerXSpeed = 7;
 
 Player.prototype.moveX = function(step, level, keys) {
   this.speed.x = 0;
-  if (keys.left) this.speed.x -= playerXSpeed;
-  if (keys.right) this.speed.x += playerXSpeed;
+  if (keys.left) this.speed.x = -playerXSpeed;
+  if (keys.right) this.speed.x = playerXSpeed;
 
   var motion = new Vector(this.speed.x * step, 0);
   // Find out where the player character will be in this frame
@@ -354,7 +356,9 @@ Player.prototype.moveY = function(step, level, keys) {
   if (obstacle) {
     level.playerTouched(obstacle);
     if (keys.up && this.speed.y > 0)
-      this.speed.y = -jumpSpeed;
+    {
+		this.speed.y = -jumpSpeed;  
+	}
     else
       this.speed.y = 0;
   } else {
