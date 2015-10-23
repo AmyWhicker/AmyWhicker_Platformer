@@ -19,27 +19,40 @@ function Level(plan) {
 
   // Store a list of actors to process each frame
   this.actors = [];
+  
+  this.daytime = true;
 
+  this.toggleDelay = 0;
+  
   // Loop through each row in the plan, creating an array in our grid
   for (var y = 0; y < this.height; y++) {
     var line = plan[y], gridLine = [];
 
     // Loop through each array element in the inner array for the type of the tile
     for (var x = 0; x < this.width; x++) {
-      // Get the type from that character in the string. It can be 'd', '!' or ' ', or 'n'
+      // Get the type from that character in the string. It can be 'd', 'n', '!' or ' ', 'x'
       // If the character is ' ', assign null.
 
       var ch = line[x], fieldType = null;
       var Actor = actorChars[ch];
       // Use if and else to handle the three cases
-      if (Actor)
+      if (Actor) {
         // Create a new actor at that grid position.
         this.actors.push(new Actor(new Vector(x, y), ch));
-      else if (ch == "d")
-        fieldType = "wall";
+	  }
+	  else if (ch == "x"){
+		fieldType = "wall";
+	  }
+      else if (ch == "d"){
+		fieldType = "daywall";
+	  }
+	  else if (ch == "n") {
+		fieldType = "nightwall";
+	  }
       // Because there is a third case (space ' '), use an "else if" instead of "else"
-      else if (ch == "!")
-        fieldType = "lava";
+      else if (ch == "!"){
+		fieldType = "lava";
+	  }
 
       // "Push" the fieldType, which is a string, onto the gridLine array (at the end).
       gridLine.push(fieldType);
@@ -182,7 +195,16 @@ DOMDisplay.prototype.drawFrame = function() {
     this.wrap.removeChild(this.actorLayer);
   this.actorLayer = this.wrap.appendChild(this.drawActors());
   // Update the status each time with this.level.status"
-  this.wrap.className = "game " + (this.level.status || "");
+  var dayornight;
+  if(this.level.daytime)
+  {
+	  dayornight=" day";
+  }
+  else
+  {
+	  dayornight=" night";
+  }
+  this.wrap.className = "game " + (this.level.status || "") + dayornight;
   this.scrollPlayerIntoView();
 };
 
@@ -310,25 +332,13 @@ Gem.prototype.act = function(step){
 	this.pos = this.basePos.plus(new Vector(0, wobblePos));
 }
 
-var maxStep = 0.05;
-
-var wobbleSpeed = 8, wobbleDist = 0.07;
-
-Coin.prototype.act = function(step) {
-  this.wobble += step * wobbleSpeed;
-  var wobblePos = Math.sin(this.wobble) * wobbleDist;
-  this.pos = this.basePos.plus(new Vector(0, wobblePos));
-};
-
-var maxStep = 0.05;
-
 var playerXSpeed = 7;
 
 Player.prototype.moveX = function(step, level, keys) {
   this.speed.x = 0;
   if (keys.left) this.speed.x = -playerXSpeed;
   if (keys.right) this.speed.x = playerXSpeed;
-
+  
   var motion = new Vector(this.speed.x * step, 0);
   // Find out where the player character will be in this frame
   var newPos = this.pos.plus(motion);
@@ -369,7 +379,15 @@ Player.prototype.moveY = function(step, level, keys) {
 Player.prototype.act = function(step, level, keys) {
   this.moveX(step, level, keys);
   this.moveY(step, level, keys);
-
+  
+  if (keys.daytoggle && level.toggleDelay <= 0) {
+	  level.daytime = !level.daytime;
+	  level.toggleDelay = .1;  // This prevents toggling on every frame when T is held down
+  }
+  if (level.toggleDelay > 0) {
+	  level.toggleDelay -= step;
+  }
+  
   var otherActor = level.actorAt(this);
   if (otherActor)
     level.playerTouched(otherActor.type, otherActor);
@@ -411,7 +429,7 @@ Level.prototype.playerTouched = function(type, actor) {
   };
 
 // Arrow key codes for readibility
-var arrowCodes = {37: "left", 38: "up", 39: "right"};
+var arrowCodes = {37: "left", 38: "up", 39: "right", 84: "daytoggle"};
 
 // Translate the codes pressed from a key event
 function trackKeys(codes) {

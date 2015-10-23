@@ -1,10 +1,15 @@
-.background    { background: rgb(52, 166, 251);
-                 table-layout: fixed;
-                 border-spacing: 0;   }
-.background td { padding: 0;          }
+.background {table-layout: fixed;
+            border-spacing: 0;   }
+.day .background    { background: rgb(52, 166, 251);
+                 }
+.night .background    { background: grey;
+                 }
+.background td{ padding: 0;          }
 .lava          { background: rgb(255, 100, 100); }
-.wall          { background: white;   }
-
+.day .wall          { background: white;   }
+.night .wall          { background: rgb(211, 211, 211);  }
+.daywall { background: yellow;   }
+.nightwall { background: blue;   }
 .actor  { position: absolute;  }
 .coin   { background: rgb(241, 229, 89); }
 .gem { background: purple; }
