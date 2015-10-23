@@ -262,7 +262,12 @@ Level.prototype.obstacleAt = function(pos, size) {
   for (var y = yStart; y < yEnd; y++) {
     for (var x = xStart; x < xEnd; x++) {
       var fieldType = this.grid[y][x];
-      if (fieldType) return fieldType;
+	  if (fieldType) {
+		if (!this.daytime && (fieldType == "nightwall")) {return fieldType;}
+		if (fieldType == "wall") {return fieldType;}
+		if (fieldType == "lava") {return fieldType;}
+	  }
+
     }
   }
 };
@@ -429,7 +434,7 @@ Level.prototype.playerTouched = function(type, actor) {
   };
 
 // Arrow key codes for readibility
-var arrowCodes = {37: "left", 38: "up", 39: "right", 84: "daytoggle"};
+var arrowCodes = {37: "left", 38: "up", 39: "right", 32: "daytoggle"};
 
 // Translate the codes pressed from a key event
 function trackKeys(codes) {
