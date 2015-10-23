@@ -155,7 +155,7 @@ function DOMDisplay(parent, level) {
   this.drawFrame();
 }
 
-var scale = 20;
+var scale = 32;
 
 DOMDisplay.prototype.drawBackground = function() {
   var table = elt("table", "background");
@@ -263,6 +263,7 @@ Level.prototype.obstacleAt = function(pos, size) {
     for (var x = xStart; x < xEnd; x++) {
       var fieldType = this.grid[y][x];
 	  if (fieldType) {
+		if (this.daytime && (fieldType == "daywall")) {return fieldType;}
 		if (!this.daytime && (fieldType == "nightwall")) {return fieldType;}
 		if (fieldType == "wall") {return fieldType;}
 		if (fieldType == "lava") {return fieldType;}
@@ -387,7 +388,7 @@ Player.prototype.act = function(step, level, keys) {
   
   if (keys.daytoggle && level.toggleDelay <= 0) {
 	  level.daytime = !level.daytime;
-	  level.toggleDelay = .1;  // This prevents toggling on every frame when T is held down
+	  level.toggleDelay = .2;  // This prevents toggling on every frame when T is held down
   }
   if (level.toggleDelay > 0) {
 	  level.toggleDelay -= step;

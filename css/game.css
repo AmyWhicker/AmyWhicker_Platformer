@@ -5,8 +5,8 @@
 .night .background    { background: grey;
                  }
 .background td{ padding: 0;          }
-.lava          { background: rgb(255, 100, 100); }
-.day .wall          { background: white;   }
+.lava          { background-image: url("../images/lava.png"); }
+.day .wall          { background-image: url("../images/Brick.png"); }
 .night .wall          { background: rgb(211, 211, 211);  }
 .daywall { background: yellow;   }
 .nightwall { background: blue;   }
@@ -17,8 +17,8 @@
 
 .game {
   overflow: hidden;
-  max-width: 600px;
-  max-height: 450px;
+  max-width: 800px;
+  max-height: 650px;
   position: relative;
 }
 
