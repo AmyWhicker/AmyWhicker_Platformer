@@ -75,7 +75,7 @@ function Level(plan, totalLevels, n) {
 
 // Check if level is finished
 Level.prototype.isFinished = function() {
-  return this.status != null && this.finishDelay < 0;
+  return (this.status == "lost" || this.status == "won") && this.finishDelay < 0;
 };
 
 function Vector(x, y) {
@@ -305,7 +305,7 @@ Level.prototype.actorAt = function(actor) {
 // Update simulation each step based on keys & step size
 Level.prototype.animate = function(step, keys) {
   // Have game continue past point of win or loss
-  if (this.status != null)
+  if (this.status == "won" || this.status == "lost")
     this.finishDelay -= step;
 
   // Ensure each is maximum 100 milliseconds 
@@ -352,8 +352,8 @@ var playerXSpeed = 7;
 
 Player.prototype.moveX = function(step, level, keys) {
   this.speed.x = 0;
-  if (keys.left) this.speed.x = -playerXSpeed;
-  if (keys.right) this.speed.x = playerXSpeed;
+  if (keys.left && level.status != "lost") this.speed.x = -playerXSpeed;
+  if (keys.right && level.status != "lost") this.speed.x = playerXSpeed;
   
   var motion = new Vector(this.speed.x * step, 0);
   // Find out where the player character will be in this frame
@@ -379,7 +379,7 @@ Player.prototype.moveY = function(step, level, keys) {
   var obstacle = level.obstacleAt(newPos, this.size);
   // The floor is also an obstacle -- only allow players to 
   // jump if they are touching some obstacle.
-  if (obstacle) {
+  if (obstacle && level.status != "lost") {
     level.playerTouched(obstacle);
     if (keys.up && this.speed.y > 0)
     {
@@ -411,8 +411,7 @@ Player.prototype.act = function(step, level, keys) {
 
   // death animation
   if (level.status == "lost") {
-    this.pos.y += step;
-    this.size.y -= step;
+    this.pos.y -= step*9;
   }
 };
 
@@ -420,9 +419,9 @@ Level.prototype.playerTouched = function(type, actor) {
 
   // if the player touches lava and the player hasn't won
   // Player loses
-  if (type == "lava" && this.status != "won") {
+  if (type == "lava" && this.status != "won" && this.status != "lost") {
     this.status = "lost";
-    this.finishDelay = 1;
+    this.finishDelay = .8;
   } else if (type == "coin") {
 		this.actors = this.actors.filter(function(other) {
 		return other != actor; //this removes the coin from the list of actors and it won't display
@@ -440,16 +439,8 @@ Level.prototype.playerTouched = function(type, actor) {
 	}
 	if (type == "door") {
       this.status = "won";
-      this.finishDelay = 1;
+      this.finishDelay = .8;
 	}
-	
-	// If there aren't any coins left, player wins
-    if (!this.actors.some(function(actor) {
-           return actor.type == "coin";
-         })) {
-      this.status = "won";
-      this.finishDelay = 1;
-    }
   };
 
 // Arrow key codes for readibility
