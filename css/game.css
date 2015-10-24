@@ -3,6 +3,7 @@
 
 .day .background    	{ background: rgb(52, 166, 251); }
 .night .background     { background: black; }
+.finalwin .background {background-image: url("../images/finalwin.png"); }
 .background td		{ padding: 0; }
 
 .day .wall          { background-image: url("../images/Brick.png"); }
@@ -27,8 +28,11 @@
   position: relative;
 }
 
+.left .player {background-image: url("../images/leftplayer.png");}
+.right .player {background-image: url("../images/rightplayer.png");}
+
 .lost .player {
-  background: rgb(160, 64, 64);
+  background-image: url("../images/lostplayer.png");
 }
 
 .won .player {

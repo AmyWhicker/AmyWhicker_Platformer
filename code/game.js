@@ -8,11 +8,13 @@ var actorChars = {
 };
 
 
-function Level(plan) {
+function Level(plan, totalLevels, n) {
+  this.n = n;
+  this.totalLevels = totalLevels;
+  
   // Use the length of a single row to set the width of the level
   this.width = plan[0].length;
   // Use the number of rows to set the height
-
   this.height = plan.length;
 
   // Store the individual tiles in our own, separate array
@@ -199,12 +201,14 @@ DOMDisplay.prototype.drawFrame = function() {
     this.wrap.removeChild(this.actorLayer);
   this.actorLayer = this.wrap.appendChild(this.drawActors());
   // Update the status each time with this.level.status"
-  var dayornight; //Steve
-  if(this.level.daytime)
-	{ dayornight=" day"; }
-  else
+  var dayornight = " day";
+  if(!this.level.daytime)
 	{ dayornight=" night"; }
-  this.wrap.className = "game " + (this.level.status || "") + dayornight;
+  var finalwin = "";
+  if (this.level.n == this.level.totalLevels - 1) { 
+	finalwin = " finalwin";
+  }
+  this.wrap.className = "game " + (this.level.status || "") + dayornight + finalwin;
   this.scrollPlayerIntoView();
 };
 
@@ -519,14 +523,15 @@ function runGame(plans, Display) {
   function startLevel(n) {
     // Create a new level using the nth element of array plans
     // Pass in a reference to Display function, DOMDisplay (in index.html).
-    runLevel(new Level(plans[n]), Display, function(status) {
+    var then = function(status) {
       if (status == "lost")
         startLevel(n);
       else if (n < plans.length - 1)
         startLevel(n + 1);
       else
         console.log("You win!");
-    });
+    };
+	runLevel(new Level(plans[n], plans.length, n), Display, then);
   }
   startLevel(0);
 }

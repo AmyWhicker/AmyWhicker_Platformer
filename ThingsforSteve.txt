@@ -1,10 +1,10 @@
-0. color pallete
+DONE - color pallete
 
-1. bottom of screen isn't lava anymore for some reason
+DONE - bottom of screen isn't lava anymore for some reason
 
-2. I made a branch in case the door thing broke stuff but I didn't break, and now I'm working off of this branch. Should I go back to the main thing?
+DONE - I made a branch in case the door thing broke stuff but I didn't break, and now I'm working off of this branch. Should I go back to the main thing?
 
-3. ctrl F "steve"
+DONE - ctrl F "steve"
 
-4. Black hole idea. I think this would qualify as "new lose event"? Have empty gaps in the ground instead of lava. When player falls into the hole (low enough past the point of no return), the gravity increases significantly, sucking the player downward, appearing like a black hole affect.
+SCRAPPED - Black hole idea. I think this would qualify as "new lose event"? Have empty gaps in the ground instead of lava. When player falls into the hole (low enough past the point of no return), the gravity increases significantly, sucking the player downward, appearing like a black hole affect.
 
