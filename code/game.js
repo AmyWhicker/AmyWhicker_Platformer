@@ -416,7 +416,7 @@ Level.prototype.playerTouched = function(type, actor) {
 
   // if the player touches lava and the player hasn't won
   // Player loses
-  if (type == "lava" && this.status == null) {
+  if (type == "lava" && this.status != "won") {
     this.status = "lost";
     this.finishDelay = 1;
   } else if (type == "coin") {
@@ -425,7 +425,7 @@ Level.prototype.playerTouched = function(type, actor) {
 		});
 		gravity = 30;
 		jumpSpeed = 17;
-		this.status = "player";
+		this.status = null;
 	} else if(type == "gem") {
 		this.actors = this.actors.filter(function(other){
 			return other != actor; 
