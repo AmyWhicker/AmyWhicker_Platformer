@@ -18,7 +18,7 @@
 .coin   	{ background: rgb(241, 229, 89); }
 .gem 	{ background: purple; }
 .lava      { background-image: url("../images/spike.gif"); }
-.door	{ background-image: url("../images/door.jpg"); }
+.door	{ background-image: url("../images/door.png"); }
 
 .game {
   overflow: hidden;
