@@ -2,23 +2,23 @@
 					 border-spacing: 0; }
 
 .day .background    	{ background: rgb(52, 166, 251); }
-.night .background     { background: grey; }
+.night .background     { background: black; }
 .background td		{ padding: 0; }
 
 .day .wall          { background-image: url("../images/Brick.png"); }
-.night .wall      { background: rgb(211, 211, 211);  }
+.night .wall      { background-image: url("../images/Brick.png");  }
 
-
-.daywall 	{ background: yellow;   }
-.nightwall 	{ background: blue;   }
-
+.day .daywall 		{ background: yellow;  }	/* This is how daywall appears during day */
+.night .daywall 		{ background: rgb(127, 127, 0); }	/* This is how daywall appears during night. Not obstacle. */
+.day .nightwall 		{ background: rgb(154, 83, 253); }	/* This is how nightwall appears during day. Not obstacle. */
+.night .nightwall 	{ background: rgb(255, 0, 255); }	/* This is how nightwall appears during night */ 
 
 .actor  	{ position: absolute;  }
-.player	{ background: black; }
-.coin   	{ background: rgb(241, 229, 89); }
+.player	{ background: green; }
+.coin   	{ background: yellow; }
 .gem 	{ background: purple; }
-.lava      { background-image: url("../images/spike.gif"); }
-.door	{ background: brown; }
+.lava      { background-image: url("../images/spikeball.png"); }
+.door	{ background-image: url("../images/door.png"); }
 
 .game {
   overflow: hidden;
@@ -35,3 +35,6 @@
   box-shadow: -4px -7px 8px white, 4px -7px 8px white;
 }
 
+.super .player {
+	box-shadow: -4px -7px 8px purple, 4px -7px 8px purple;
+}

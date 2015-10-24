@@ -1,3 +1,0 @@
-Possible idea for "new lose event" : Black Holes
-
-Have empty gaps in the ground instead of lava. In the hole, have a layer of characters signalling "the point of no return" (where the player is low enough that there is no way they can escape). These won't be visible. When player collides with this layer, the gravity increases significantly, sucking the player downward, appearing like a black hole affect.
