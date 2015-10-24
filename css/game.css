@@ -1,19 +1,24 @@
-.background {table-layout: fixed;
-            border-spacing: 0;   }
-.day .background    { background: rgb(52, 166, 251);
-                 }
-.night .background    { background: grey;
-                 }
-.background td{ padding: 0;          }
-.lava          { background-image: url("../images/lava.png"); }
+.background 			{table-layout: fixed;
+					 border-spacing: 0; }
+
+.day .background    	{ background: rgb(52, 166, 251); }
+.night .background     { background: grey; }
+.background td		{ padding: 0; }
+
 .day .wall          { background-image: url("../images/Brick.png"); }
-.night .wall          { background: rgb(211, 211, 211);  }
-.daywall { background: yellow;   }
-.nightwall { background: blue;   }
-.actor  { position: absolute;  }
-.coin   { background: rgb(241, 229, 89); }
-.gem { background: purple; }
-.player { background: rgb(64, 64, 64); }
+.night .wall      { background: rgb(211, 211, 211);  }
+
+
+.daywall 	{ background: yellow;   }
+.nightwall 	{ background: blue;   }
+
+
+.actor  	{ position: absolute;  }
+.player	{ background: black; }
+.coin   	{ background: rgb(241, 229, 89); }
+.gem 	{ background: purple; }
+.lava      { background-image: url("../images/spike.gif"); }
+.door	{ background: brown; }
 
 .game {
   overflow: hidden;
@@ -25,6 +30,8 @@
 .lost .player {
   background: rgb(160, 64, 64);
 }
+
 .won .player {
   box-shadow: -4px -7px 8px white, 4px -7px 8px white;
 }
+

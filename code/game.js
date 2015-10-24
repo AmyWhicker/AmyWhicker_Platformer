@@ -49,6 +49,9 @@ function Level(plan) {
 	  else if (ch == "n") {
 		fieldType = "nightwall";
 	  }
+	  else if (ch == "z") {
+		fieldType = "door";
+	  }
       // Because there is a third case (space ' '), use an "else if" instead of "else"
       else if (ch == "!"){
 		fieldType = "lava";
@@ -425,7 +428,8 @@ Level.prototype.playerTouched = function(type, actor) {
 		gravity = 2;
 		jumpSpeed = 4;
 	}
-    // If there aren't any coins left, player wins
+
+	// If there aren't any coins left, player wins
     if (!this.actors.some(function(actor) {
            return actor.type == "coin";
          })) {
