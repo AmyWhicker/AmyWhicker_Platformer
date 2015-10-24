@@ -11,6 +11,7 @@ var actorChars = {
 function Level(plan, totalLevels, n) {
   this.n = n;
   this.totalLevels = totalLevels;
+  this.playerFacingRight = true;
   
   // Use the length of a single row to set the width of the level
   this.width = plan[0].length;
@@ -200,15 +201,24 @@ DOMDisplay.prototype.drawFrame = function() {
   if (this.actorLayer)
     this.wrap.removeChild(this.actorLayer);
   this.actorLayer = this.wrap.appendChild(this.drawActors());
-  // Update the status each time with this.level.status"
+
+  // Update the style depending on if it's daytime or nighttime
   var dayornight = " day";
   if(!this.level.daytime)
 	{ dayornight=" night"; }
+
+  // Update the style depending on if player is facing right or left
+  var playerFacingRight = " right";
+  if(!this.level.playerFacingRight)
+	{ playerFacingRight=" left"; }
+
+  // Update the background if you're on the last level
   var finalwin = "";
   if (this.level.n == this.level.totalLevels - 1) { 
 	finalwin = " finalwin";
   }
-  this.wrap.className = "game " + (this.level.status || "") + dayornight + finalwin;
+  
+  this.wrap.className = "game " + (this.level.status || "") + dayornight + finalwin + playerFacingRight;
   this.scrollPlayerIntoView();
 };
 
@@ -352,8 +362,14 @@ var playerXSpeed = 7;
 
 Player.prototype.moveX = function(step, level, keys) {
   this.speed.x = 0;
-  if (keys.left && level.status != "lost") this.speed.x = -playerXSpeed;
-  if (keys.right && level.status != "lost") this.speed.x = playerXSpeed;
+  if (keys.left && level.status != "lost") {
+	  this.speed.x = -playerXSpeed;
+	  level.playerFacingRight = false;
+  }
+  if (keys.right && level.status != "lost") {
+	  this.speed.x = playerXSpeed;
+	  level.playerFacingRight = true;
+  }
   
   var motion = new Vector(this.speed.x * step, 0);
   // Find out where the player character will be in this frame
@@ -361,8 +377,12 @@ Player.prototype.moveX = function(step, level, keys) {
   // Find if there's an obstacle there
   var obstacle = level.obstacleAt(newPos, this.size);
   // Handle lava by calling playerTouched
-  if (obstacle)
-    level.playerTouched(obstacle);
+  if (obstacle) {
+	level.playerTouched(obstacle);
+    if (obstacle == "door" ) {
+		this.pos = newPos; 
+		}
+	}
   else
     // Move if there's not an obstacle there.
     this.pos = newPos;
@@ -416,7 +436,6 @@ Player.prototype.act = function(step, level, keys) {
 };
 
 Level.prototype.playerTouched = function(type, actor) {
-
   // if the player touches lava and the player hasn't won
   // Player loses
   if (type == "lava" && this.status != "won" && this.status != "lost") {
@@ -437,9 +456,9 @@ Level.prototype.playerTouched = function(type, actor) {
 		jumpSpeed = 5;
 		this.status = "super";
 	}
-	if (type == "door") {
+	if (type == "door" && this.status != "won") {
       this.status = "won";
-      this.finishDelay = .8;
+      this.finishDelay = .5;
 	}
   };
 
