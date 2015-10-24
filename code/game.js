@@ -94,7 +94,7 @@ Vector.prototype.times = function(factor) {
 // A Player has a size, speed and position.
 function Player(pos) {
   this.pos = pos.plus(new Vector(0, -0.5));
-  this.size = new Vector(0.8, 1.5);
+  this.size = new Vector(1.0, 1.5);
   this.speed = new Vector(0, 0);
 }
 Player.prototype.type = "player";
@@ -424,19 +424,19 @@ Level.prototype.playerTouched = function(type, actor) {
 		});
 		gravity = 30;
 		jumpSpeed = 17;
+		this.status = "player";
 	} else if(type == "gem") {
 		this.actors = this.actors.filter(function(other){
 			return other != actor; 
 		});
 		gravity = 2;
 		jumpSpeed = 4;
+		this.status = "super";
 	}
-    
 	if (type == "door") {
       this.status = "won";
       this.finishDelay = 1;
 	}
-	
 	
 	// If there aren't any coins left, player wins
     if (!this.actors.some(function(actor) {
