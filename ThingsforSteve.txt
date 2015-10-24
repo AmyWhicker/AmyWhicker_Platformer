@@ -1,6 +1,6 @@
 0. color pallete
 
-1. When in "super-player" mode, bottom of screen isn't lava
+1. bottom of screen isn't lava anymore for some reason
 
 2. I made a branch in case the door thing broke stuff but I didn't break, and now I'm working off of this branch. Should I go back to the main thing?
 

@@ -1,4 +1,5 @@
 // Map each class of actor to a character
+// Map each class of actor to a character
 var actorChars = {
   "@": Player,
   "o": Coin,
