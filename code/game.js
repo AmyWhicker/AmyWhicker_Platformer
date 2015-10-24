@@ -198,15 +198,11 @@ DOMDisplay.prototype.drawFrame = function() {
     this.wrap.removeChild(this.actorLayer);
   this.actorLayer = this.wrap.appendChild(this.drawActors());
   // Update the status each time with this.level.status"
-  var dayornight;
+  var dayornight; //Steve
   if(this.level.daytime)
-  {
-	  dayornight=" day";
-  }
+	{ dayornight=" day"; }
   else
-  {
-	  dayornight=" night";
-  }
+	{ dayornight=" night"; }
   this.wrap.className = "game " + (this.level.status || "") + dayornight;
   this.scrollPlayerIntoView();
 };
@@ -266,10 +262,16 @@ Level.prototype.obstacleAt = function(pos, size) {
     for (var x = xStart; x < xEnd; x++) {
       var fieldType = this.grid[y][x];
 	  if (fieldType) {
-		if (this.daytime && (fieldType == "daywall")) {return fieldType;}
-		if (!this.daytime && (fieldType == "nightwall")) {return fieldType;}
-		if (fieldType == "wall") {return fieldType;}
-		if (fieldType == "lava") {return fieldType;}
+		if (this.daytime && (fieldType == "daywall"))
+			{return fieldType;}
+		if (!this.daytime && (fieldType == "nightwall"))
+			{return fieldType;}
+		if (fieldType == "wall")
+			{return fieldType;}
+		if (fieldType == "lava")
+			{return fieldType;}
+		if (fieldType == "door")
+			{return fieldType;}		
 	  }
 
     }
@@ -389,9 +391,10 @@ Player.prototype.act = function(step, level, keys) {
   this.moveX(step, level, keys);
   this.moveY(step, level, keys);
   
+  // This prevents day-night toggling on every frame when T is held down
   if (keys.daytoggle && level.toggleDelay <= 0) {
 	  level.daytime = !level.daytime;
-	  level.toggleDelay = .2;  // This prevents toggling on every frame when T is held down
+	  level.toggleDelay = .2;
   }
   if (level.toggleDelay > 0) {
 	  level.toggleDelay -= step;
@@ -401,7 +404,7 @@ Player.prototype.act = function(step, level, keys) {
   if (otherActor)
     level.playerTouched(otherActor.type, otherActor);
 
-  // Losing animation
+  // death animation
   if (level.status == "lost") {
     this.pos.y += step;
     this.size.y -= step;
@@ -416,19 +419,25 @@ Level.prototype.playerTouched = function(type, actor) {
     this.status = "lost";
     this.finishDelay = 1;
   } else if (type == "coin") {
-    this.actors = this.actors.filter(function(other) {
-      return other != actor;
-    });
-	gravity = 30;
-	jumpSpeed = 17;
-  } else if(type == "gem") {
+		this.actors = this.actors.filter(function(other) {
+		return other != actor; //this removes the coin from the list of actors and it won't display
+		});
+		gravity = 30;
+		jumpSpeed = 17;
+	} else if(type == "gem") {
 		this.actors = this.actors.filter(function(other){
-			return other != actor; //this removes the gem from the list of actors and it won't display
+			return other != actor; 
 		});
 		gravity = 2;
 		jumpSpeed = 4;
 	}
-
+    
+	if (type == "door") {
+      this.status = "won";
+      this.finishDelay = 1;
+	}
+	
+	
 	// If there aren't any coins left, player wins
     if (!this.actors.some(function(actor) {
            return actor.type == "coin";

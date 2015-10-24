@@ -35,3 +35,6 @@
   box-shadow: -4px -7px 8px white, 4px -7px 8px white;
 }
 
+.super .player {
+	box-shadow: -4px -7px 8px purple, 4px -7px 8px purple;
+}
