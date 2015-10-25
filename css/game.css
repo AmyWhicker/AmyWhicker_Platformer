@@ -1,23 +1,30 @@
 .background 			{table-layout: fixed;
 					 border-spacing: 0; }
 
-.day .background    	{ background: rgb(52, 166, 251); }
-.night .background     { background: black; }
+.day .background    	{ background-image: url("../images/clouds.jpg"); }
+.night .background     { background-image: url("../images/stars.jpg"); }
 .finalwin .background {background-image: url("../images/finalwin.png"); }
 .background td		{ padding: 0; }
 
-.day .wall          { background-image: url("../images/Brick.png"); }
-.night .wall      { background-image: url("../images/Brick.png");  }
+.day .wall          { background-image: url("../images/daywall.png"); }
+.night .wall      { background-image: url("../images/nightwall.png");  }
 
-.day .daywall 		{ background: yellow;  }	/* This is how daywall appears during day */
-.night .daywall 		{ background: rgb(127, 127, 0); }	/* This is how daywall appears during night. Not obstacle. */
-.day .nightwall 		{ background: rgb(154, 83, 253); }	/* This is how nightwall appears during day. Not obstacle. */
-.night .nightwall 	{ background: rgb(255, 0, 255); }	/* This is how nightwall appears during night */ 
+/* This is how daywall appears during day */
+.day .daywall 		{ background-image: url("../images/daywall.png");  }
+
+/* This is how daywall appears during night. 25% opacity */	
+.night .daywall 		{ background-image: url("../images/daywall25.png"); }
+
+/* This is how nightwall appears during day. 25% opacity */
+.day .nightwall 		{ background-image: url("../images/nightwall25.png"); }
+
+/* This is how nightwall appears during night */
+.night .nightwall 	{ background-image: url("../images/nightwall.png"); }	 
 
 .actor  	{ position: absolute;  }
-.player	{ background: green; }
-.coin   	{ background: yellow; }
-.gem 	{ background: purple; }
+.player  {}
+.coin   	{ background-image: url("../images/ruby.png"); }
+.gem 	{ background-image: url("../images/amethyst.png"); }
 .lava      { background-image: url("../images/spikeball.png"); }
 .door	{ background-image: url("../images/door.png"); }
 
