@@ -26,7 +26,7 @@
 .coin   	{ background-image: url("../images/ruby.png"); }
 .gem 	{ background-image: url("../images/amethyst.png"); }
 .lava      { background-image: url("../images/spikeball.png"); }
-.door	{ background-image: url("../images/door.png"); }
+.door	{ background-image: url("../images/door.jpg"); }
 
 .game {
   overflow: hidden;
