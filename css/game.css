@@ -1,8 +1,8 @@
 .background 			{table-layout: fixed;
 					 border-spacing: 0; }
 
-.day .background    	{ background-image: url("../images/clouds.jpg"); }
-.night .background     { background-image: url("../images/stars.jpg"); }
+.day .background    	{ background-image: url("../images/clouds2.jpg"); }
+.night .background     { background-image: url("../images/stars2.jpg"); }
 .finalwin .background {background-image: url("../images/finalwin.png"); }
 .background td		{ padding: 0; }
 
