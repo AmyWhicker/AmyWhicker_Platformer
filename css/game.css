@@ -33,11 +33,6 @@
   max-width: 800px;
   max-height: 650px;
   position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
 }
 
 .left .player {background-image: url("../images/leftplayer.png");}
