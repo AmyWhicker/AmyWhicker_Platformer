@@ -18,13 +18,13 @@
 
 	function StartButton()
 	{
-	  var w = 300;
-	  var h = 100;
-	  var x = canvas.width/2 - (w/2);
-	  var y = canvas.height/2 - (h/2);
+	  var btnw = 300;
+	  var btnh = 100;
+	  var btnx = canvas.width/2 - (btnw/2);
+	  var btny = canvas.height/2 - (btnh/2);
 
 	  context.beginPath();
-      context.rect(x, y, w, h);
+      context.rect(btnx, btny, btnw, btnh);
       context.fillStyle = startButtonFillColor;
       context.fill();
       context.lineWidth = 3;
