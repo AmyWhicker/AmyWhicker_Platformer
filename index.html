@@ -13,16 +13,16 @@
 	  var circles = [];
 	  var squares = [];
 	  var hearts = [];
+
+// variables used by StartButton and checkStartButton
 	  var startButtonFillColor = "purple";
 	  var startButtonStrokeColor = "white";
-
-	function StartButton()
-	{
 	  var w = 300;
 	  var h = 100;
 	  var x = canvas.width/2 - (w/2);
 	  var y = canvas.height/2 - (h/2);
 
+	function StartButton()	{
 	  context.beginPath();
       context.rect(x, y, w, h);
       context.fillStyle = startButtonFillColor;
@@ -32,40 +32,38 @@
       context.stroke();
 	}
 
-	function doFrame()
-		{
-			fillBackgroundColor();
-			updateShapes();
-			StartButton();
-			renderText();
-			elapsedTime += 30.0/1000.0;
-		}
+	function doFrame()	{
+		fillBackgroundColor();
+		updateShapes();
+		StartButton();
+		renderText();
+		elapsedTime += 30.0/1000.0;
+	}
 
-	function fillBackgroundColor() {
+	function fillBackgroundColor() 	{
 			resizeCanvas();
 	  		context.fillStyle = 'black';
 	  		context.fillRect(0, 0, canvas.width, canvas.height);
 	}
 
-	function resizeCanvas() {
+	function resizeCanvas() 	{
 	  		canvas.width = window.innerWidth - 20;
 	  		canvas.height = window.innerHeight - 20;
 	}
 
-	function updateShapes()
-		{
-			for (var i = 0; i < circles.length; i++) {
-	  			drawCircle(circles[i]);
-				updateCircle(circles[i]);
-	  		}
-			for (var i = 0; i < squares.length; i++) {
-				drawSquare(squares[i]);
-				updateSquare(squares[i]);
-			}
-			for (var i = 0; i < hearts.length; i++) {
-				drawHeart(hearts[i]);
-				updateHeart(hearts[i]);
-			}
+	function updateShapes()	{
+		for (var i = 0; i < circles.length; i++) {
+	  		drawCircle(circles[i]);
+			updateCircle(circles[i]);
+	  	}
+		for (var i = 0; i < squares.length; i++) {
+			drawSquare(squares[i]);
+			updateSquare(squares[i]);
+		}
+		for (var i = 0; i < hearts.length; i++) {
+			drawHeart(hearts[i]);
+			updateHeart(hearts[i]);
+		}
 	}
 
 	function renderText() {
@@ -86,6 +84,7 @@
 	  	this.dx = Math.floor(Math.random() * 4 - 2); //x velocity
 	  	this.dy = Math.floor(Math.random() * 4 - 2); //y velocity
 	}
+
 	function drawCircle(circle) {
 
 	  	context.beginPath();
@@ -94,6 +93,7 @@
 	  	//context.globalCompositeOperation = "lighter";
 	  	context.fill();
 	}
+
 	function updateCircle(circle) {
 	  	if (circle.x + circle.radius > canvas.width || circle.x - circle.radius < 0) {
 			circle.dx = -circle.dx*.8;
@@ -116,11 +116,13 @@
 	  	this.dx = Math.floor(Math.random() * 4 - 2);
 	  	this.dy = Math.floor(Math.random() * 4 - 2);
 	}
+
 	function drawSquare(sq) {
 	  	context.rect(sq.x, sq.y, 10, 10);
 	  	context.fillStyle = sq.color;
 	  	context.fill();
 	}
+
 	function updateSquare(sq) {
 	  		if (sq.x + 10 > canvas.width || sq.x - 10 < 0) {
 	  			sq.dx = -sq.dx*.8;
@@ -139,6 +141,7 @@
 	  	this.dx = Math.floor(Math.random() * 10) - 2; //x velocity
 	  	this.dy = Math.floor(Math.random() * 10) - 2; //y velocity
 	}
+
 	function drawHeart(heart) {
 		context.translate(heart.x, heart.y);
 		context.beginPath();
@@ -153,6 +156,7 @@
 		context.fill();
 		context.translate(-heart.x, -heart.y);
 	}
+
 	function updateHeart(h) {
 	  		if (h.x + 150 > canvas.width || h.x < 0) { //right left
 	  			h.dx = -h.dx;
@@ -210,8 +214,8 @@
 		clearInterval(timer);
 		runGame(GAME_LEVELS, DOMDisplay);
 	  }
-
 	}
+
 	function init() {
 	  	canvas = document.getElementById('canvas');
 	  	context = canvas.getContext("2d");
@@ -225,7 +229,9 @@
 			handleMouseMove(event.clientX, event.clientY);
 		};
 	}
+
 	window.onload = init;
+
 </script>
 </head>
 <body>
