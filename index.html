@@ -70,9 +70,9 @@
 
 	function renderText() {
 		context.font = "40px Georgia";
-		context.fillStyle = 'black';
+		context.fillStyle = "black";
 		context.textAlign = "center";
-		context.fillText("Start Game", canvas.width/2, canvas.height/2);
+		context.fillText("Start Game", canvas.width/2, canvas.height/2 + 10);
 	}
 
 	function Circle(x, y) {
@@ -165,11 +165,16 @@
 	}
 
 	function degreesToRadians(degrees) {
-	  		return (degrees * Math.PI) / 180;
+	  	return (degrees * Math.PI) / 180;
 	}
 
-	function checkStartButton (x, y) {
-		if (x > 250)
+	function checkStartButton (x, y) { 	//checks position of mouse relative to Start Button
+		if (
+			x >= (canvas.width/2 - 150) &&
+			x <= (canvas.width/2 + 150) &&
+			y >= (canvas.height/2 - 50) &&
+			y <= (canvas.height/2 + 50)
+		   )	
 		{
 			return true;
 		}
@@ -178,8 +183,8 @@
 
 	function handleMouseMove (x, y) {
 		if (checkStartButton(x, y) == true) { 
-		startButtonFillColor = "green";
-		startButtonStrokeColor = "red";
+		startButtonFillColor = "indigo";
+		startButtonStrokeColor = "LightGray";
 		}
 		else {
 		startButtonFillColor = "purple";
@@ -188,7 +193,7 @@
 	}
 
 	function handleClick(x, y) {
-/*	  var found = false;
+	  var found = false;
 	  if (!found) {
 		var r = Math.floor(Math.random()*10);
 	  	if (r%3 == 0) {
@@ -199,12 +204,13 @@
 			hearts.push(new Heart(x, y));
 		} else {};
 	  }
-*/
-
+	  if (checkStartButton(x, y) == true) {
 		canvas.hidden=true;
 		buttonCanvas.hidden=true;
 		clearInterval(timer);
 		runGame(GAME_LEVELS, DOMDisplay);
+	  }
+
 	}
 	function init() {
 	  	canvas = document.getElementById('canvas');
