@@ -17,14 +17,14 @@
 // variables used by StartButton and checkStartButton
 	  var startButtonFillColor = "purple";
 	  var startButtonStrokeColor = "white";
-	  var btnw = 300;
-	  var btnh = 100;
-	  var btnx = canvas.width/2 - (w/2);
-	  var btny = canvas.height/2 - (h/2);
+	  var w = 300;
+	  var h = 100;
+	  var x = canvas.width/2 - (w/2);
+	  var y = canvas.height/2 - (h/2);
 
 	function StartButton()	{
 	  context.beginPath();
-      context.rect(btnx, btny, btnw, btnh);
+      context.rect(x, y, w, h);
       context.fillStyle = startButtonFillColor;
       context.fill();
       context.lineWidth = 3;
@@ -172,19 +172,6 @@
 	  	return (degrees * Math.PI) / 180;
 	}
 
-/*	function checkStartButton (x, y) { 	//checks position of mouse relative to Start Button
-		if (
-			x >= (canvas.width/2 - 150) &&
-			x <= (canvas.width/2 + 150) &&
-			y >= (canvas.height/2 - 50) &&
-			y <= (canvas.height/2 + 50)
-		   )	
-		{
-			return true;
-		}
-		return false;
-	}*/
-
 	function checkStartButton (x, y) { 	//checks position of mouse relative to Start Button
 		if (
 			x >= (canvas.width/2 - 150) &&
@@ -197,8 +184,6 @@
 		}
 		return false;
 	}
-
-
 
 	function handleMouseMove (x, y) {
 		if (checkStartButton(x, y) == true) { 
