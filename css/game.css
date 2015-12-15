@@ -1,5 +1,7 @@
-.background 			{table-layout: fixed;
-					 border-spacing: 0; }
+.background 	{
+	table-layout: fixed;
+	border-spacing: 0;
+}
 
 .day .background    	{ background-image: url("../images/clouds2.jpg"); }
 .night .background     { background-image: url("../images/stars2.jpg"); }
@@ -40,20 +42,15 @@
   display: block;
 }
 
-.left .player {background-image: url("../images/leftplayer.png");}
-.right .player {background-image: url("../images/rightplayer.png");}
+.left .player 	{ background-image: url("../images/leftplayer.png");}
 
-.lost .player {
-  background-image: url("../images/lostplayer.png");
-}
+.right .player 	{ background-image: url("../images/rightplayer.png");}
 
-.won .player {
-  box-shadow: -4px -7px 8px white, 4px -7px 8px white;
-}
+.lost .player 	{ background-image: url("../images/lostplayer.png");}
 
-.super .player {
-	box-shadow: -4px -7px 8px purple, 4px -7px 8px purple;
-}
+.won .player 	{ box-shadow: -4px -7px 8px white, 4px -7px 8px white;}
+
+.super .player 	{ box-shadow: -4px -7px 8px purple, 4px -7px 8px purple;}
 
 #instructions {
 	font-family: calibri;

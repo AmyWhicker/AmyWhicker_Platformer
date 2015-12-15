@@ -15,8 +15,8 @@
 	var hearts = [];
 
 // variables used by drawStartButton and checkStartButton
-	var startButtonFillColor = "purple";
-	var startButtonStrokeColor = "white";
+	var btnFillColor = "purple";
+	var btnStrokeColor = "white";
 	var btnw = 300;
 	var btnh = 100;
 	var btnx;
@@ -25,10 +25,10 @@
 	function drawStartButton()	{
 		context.beginPath();
 		context.rect(btnx, btny, btnw, btnh);
-		context.fillStyle = startButtonFillColor;
+		context.fillStyle = btnFillColor;
 		context.fill();
 		context.lineWidth = 3;
-		context.strokeStyle = startButtonStrokeColor;
+		context.strokeStyle = btnStrokeColor;
 		context.stroke();
 	}
 
@@ -191,12 +191,12 @@
 
 	function handleMouseMove (x, y) {
 		if (checkStartButton(x, y) == true) { 
-		startButtonFillColor = "indigo";
-		startButtonStrokeColor = "LightGray";
+		btnFillColor = "indigo";
+		btnStrokeColor = "LightGray";
 		}
 		else {
-		startButtonFillColor = "purple";
-		startButtonStrokeColor = "white";
+		btnFillColor = "purple";
+		btnStrokeColor = "white";
 		}
 	}
 
