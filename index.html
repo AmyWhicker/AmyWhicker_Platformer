@@ -176,10 +176,10 @@
 
 	function checkStartButton (x, y) { 	//checks position of mouse relative to Start Button
 		if (
-			x >= (btnx) &&
-			x <= (btnx + btnw) &&
-			y >= (btny) &&
-			y <= (btny + btnh)
+			x >= (btnx + 5) &&
+			x <= (btnx + btnw + 5) &&
+			y >= (btny + 5) &&
+			y <= (btny + btnh + 5)
 		   )	
 		{
 			return true;
